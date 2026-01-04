@@ -1,6 +1,6 @@
 ---
-title: Hello World
-description: Welcome to Hugo Theme Stack
+title: Unmoored
+description: How long will it last?
 slug: hello-world
 date: 2022-03-06 00:00:00+0000
 image: cover.jpg
