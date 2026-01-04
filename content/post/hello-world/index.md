@@ -5,16 +5,17 @@ slug: hello-world
 date: 2026-01-03 00:00:00+0000
 image: cover.jpg
 categories:
-    - Example Category
+    - Journal 
 tags:
-    - Example Tag
+    - Journal
 weight: 1       # You can add weight to some posts to override the default sorting (date descending)
 ---
 
-Welcome to Hugo theme Stack. This is your first post. Edit or delete it, then start writing!
+We are beginning a year-long journey to Asia and beyond. 
 
-For more information about this theme, check the documentation: https://stack.jimmycai.com/
+We do not travel to escape. We do not travel to find new stories.
 
-Want a site like this? Check out [hugo-theme-stack-stater](https://github.com/CaiJimmy/hugo-theme-stack-starter)
+We travel to carry our story into motion without losing the life that made us.
 
-> Photo by [Pawel Czerwinski](https://unsplash.com/@pawel_czerwinski) on [Unsplash](https://unsplash.com/)
+
+> Photo by [Ms.P] at the Library Way in NYC
