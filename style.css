@@ -345,6 +345,26 @@ em {
   font-family: 'Noto Serif TC', serif;
 }
 
+/* Post images */
+.post-image {
+  margin: 48px 0;
+}
+
+.post-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.post-image figcaption {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  color: var(--ghost);
+  margin-top: 12px;
+  letter-spacing: 0.02em;
+  line-height: 1.6;
+}
+
 /* Key insight blocks */
 .insight {
   font-size: 22px;
