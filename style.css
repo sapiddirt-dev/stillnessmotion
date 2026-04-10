@@ -100,9 +100,8 @@ a:hover {
    ============================================ */
 
 .home-intro {
-  margin-bottom: 64px;
-  padding-bottom: 48px;
-  border-bottom: 1px solid var(--ghost-light);
+  margin-bottom: 12px;
+  padding-bottom: 0;
 }
 
 .home-tagline {
@@ -111,6 +110,88 @@ a:hover {
   font-style: italic;
   line-height: 1.5;
   color: var(--ghost);
+}
+
+/* ---- Post filters ---- */
+.post-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px 40px;
+  margin-bottom: 56px;
+  padding-bottom: 32px;
+  border-bottom: 1px solid var(--ghost-light);
+}
+
+.filter-group {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+
+.filter-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--ghost-light);
+  margin-right: 4px;
+}
+
+.filter-btn {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  background: none;
+  border: none;
+  padding: 2px 6px;
+  cursor: pointer;
+  color: var(--ghost);
+  transition: color 0.2s ease;
+}
+
+.filter-btn:hover {
+  color: var(--ink);
+}
+
+.filter-btn.active {
+  color: var(--accent);
+}
+
+.sort-btn {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  background: none;
+  border: none;
+  padding: 2px 6px;
+  cursor: pointer;
+  color: var(--ghost);
+  transition: color 0.2s ease;
+}
+
+.sort-btn:hover {
+  color: var(--ink);
+}
+
+/* Filtered-out posts */
+.post-peek.hidden {
+  display: none;
+}
+
+/* No results message */
+.no-results {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 19px;
+  font-style: italic;
+  color: var(--ghost);
+  padding: 48px 0;
+  display: none;
+}
+
+.no-results.visible {
+  display: block;
 }
 
 /* Blog post peek cards */
@@ -128,6 +209,17 @@ a:hover {
   border-bottom: none;
 }
 
+.post-peek-banner {
+  display: block;
+  margin-bottom: 20px;
+}
+
+.post-peek-banner img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
 .post-peek-meta {
   font-family: 'IBM Plex Mono', monospace;
   font-size: 11px;
@@ -137,12 +229,32 @@ a:hover {
   margin-bottom: 12px;
 }
 
+.post-peek-lang {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 9px;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ghost);
+  border: 1px solid var(--ghost-light);
+  padding: 2px 7px;
+  margin-left: 12px;
+  vertical-align: 2px;
+}
+
 .post-peek-title {
   font-family: 'Cormorant Garamond', serif;
   font-size: 30px;
   font-weight: 500;
   line-height: 1.25;
   margin-bottom: 14px;
+}
+
+.post-peek-title.zh {
+  font-family: 'Noto Serif TC', serif;
+  font-size: 26px;
+  font-weight: 600;
+  line-height: 1.4;
 }
 
 .post-peek-title a {
@@ -159,6 +271,12 @@ a:hover {
   line-height: 1.7;
   color: var(--margin-note);
   margin-bottom: 16px;
+}
+
+.post-peek-excerpt.zh {
+  font-family: 'Noto Serif TC', serif;
+  font-size: 15.5px;
+  line-height: 1.85;
 }
 
 .post-peek-read {
@@ -236,15 +354,25 @@ p {
 }
 
 .scene {
-  margin-bottom: 52px;
+  margin-bottom: 40px;
 }
 
 .scene-break {
   text-align: center;
-  margin: 56px 0;
+  margin: 20px 0;
   color: var(--ghost-light);
   font-size: 18px;
   letter-spacing: 0.5em;
+}
+
+/* Tighten gap when image sits right before a scene-break */
+.post-image + .scene-break {
+  margin-top: 16px;
+}
+
+/* Tighten gap between scene-break and following scene */
+.scene-break + .scene {
+  margin-top: -8px;
 }
 
 /* Menu card */
@@ -324,6 +452,13 @@ p {
   display: block;
 }
 
+.aside-label.zh {
+  font-family: 'Noto Serif TC', serif;
+  font-size: 13px;
+  text-transform: none;
+  letter-spacing: 0.08em;
+}
+
 /* Voice markers */
 .voice-note {
   font-family: 'IBM Plex Mono', monospace;
@@ -343,6 +478,18 @@ em {
 
 .zh {
   font-family: 'Noto Serif TC', serif;
+}
+
+/* Post banner */
+.post-banner {
+  width: 100%;
+  margin-bottom: 48px;
+}
+
+.post-banner img {
+  width: 100%;
+  height: auto;
+  display: block;
 }
 
 /* Post images */
@@ -409,4 +556,5 @@ em {
   .menu-card { padding: 24px 20px; }
   .insight { font-size: 19px; }
   .site-nav a { margin-left: 16px; }
+  .post-filters { gap: 16px 32px; }
 }
