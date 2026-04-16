@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stillness & Motion</title>
+  <meta name="description" content="Stillness in the center, motion on the map.">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=IBM+Plex+Mono:ital,wght@0,300;0,400;1,300;1,400&family=Noto+Serif+TC:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="grain"></div>
+
+<header class="site-header">
+  <a href="/" class="site-title">Stillness & Motion</a>
+  <nav class="site-nav">
+    <a href="/">Writing</a>
+  </nav>
+</header>
+
+<main class="container">
+
+  <div class="home-intro">
+    <p class="home-tagline">Stillness in the center, motion on the map.</p>
+  </div>
+
+  <!-- Filters & sort — language, place, date -->
+  <div class="post-filters">
+    <div class="filter-group">
+      <span class="filter-label">Language</span>
+      <button class="filter-btn active" data-filter="lang" data-value="all">All</button>
+      <button class="filter-btn" data-filter="lang" data-value="zh">中文</button>
+      <button class="filter-btn" data-filter="lang" data-value="en">EN</button>
+    </div>
+    <div class="filter-group">
+      <span class="filter-label">Place</span>
+      <button class="filter-btn active" data-filter="location" data-value="all">All</button>
+      <button class="filter-btn" data-filter="location" data-value="taiwan">Taiwan</button>
+      <button class="filter-btn" data-filter="location" data-value="korea">Korea</button>
+    </div>
+    <div class="filter-group">
+      <span class="filter-label">Date</span>
+      <button class="sort-btn" data-direction="desc">Newest first</button>
+    </div>
+  </div>
+
+  <!--
+    Post list — each <li> carries three data attributes:
+      data-lang      "zh" or "en"
+      data-location  country in lowercase, e.g. "taiwan", "korea"
+      data-date      YYYY-MM for sort order
+    Posts are listed oldest-first by default.
+  -->
+  <ul class="post-list">
+
+    <li class="post-peek" data-lang="zh" data-location="taiwan" data-date="2026-02">
+      <a href="posts/tainan.html" class="post-peek-banner">
+        <img src="posts/images/tainan-banner.png" alt="Watercolor of a steaming bowl of beef soup on a wooden table, empty stool, predawn light">
+      </a>
+      <div class="post-peek-meta">Tainan, Taiwan · February 2026 <span class="post-peek-lang">ZH</span></div>
+      <h2 class="post-peek-title zh">
+        <a href="posts/tainan.html">我在台南吃得起所有東西，這就是問題所在</a>
+      </h2>
+      <p class="post-peek-excerpt zh">
+        清晨五點半，一碗溫體牛肉湯。一百五十台幣。我吃得起這裡的所有東西。這不是一件值得驕傲的事。
+      </p>
+      <a href="posts/tainan.html" class="post-peek-read">Read</a>
+    </li>
+
+    <li class="post-peek" data-lang="en" data-location="taiwan" data-date="2026-03">
+      <a href="posts/rational-coffee.html" class="post-peek-banner">
+        <img src="posts/images/rational-coffee-banner.png" alt="Coffee beans rendered as physics diagrams">
+      </a>
+      <div class="post-peek-meta">Hualien, Taiwan · March 2026 <span class="post-peek-lang">EN</span></div>
+      <h2 class="post-peek-title">
+        <a href="posts/rational-coffee.html">The Strong CP Problem in a Cup of Coffee</a>
+      </h2>
+      <p class="post-peek-excerpt">
+        Aspects of Symmetry on the shelf. Quantum mechanics on the menu. A topological surface for dessert. We came for coffee and got the universe in our cup.
+      </p>
+      <a href="posts/rational-coffee.html" class="post-peek-read">Read</a>
+    </li>
+
+    <li class="post-peek" data-lang="en" data-location="korea" data-date="2026-04">
+      <a href="posts/someone-elses-spring.html" class="post-peek-banner">
+        <img src="posts/images/someone-elses-spring-banner.png" alt="A face made of geometric fragments, cherry blossoms growing through it, petals falling away">
+      </a>
+      <div class="post-peek-meta">Busan, Korea · April 2026 <span class="post-peek-lang">EN</span></div>
+      <h2 class="post-peek-title">
+        <a href="posts/someone-elses-spring.html">Someone Else's Spring</a>
+      </h2>
+      <p class="post-peek-excerpt">
+        Cherry blossoms, and the dependencies you can't cut down.
+      </p>
+      <a href="posts/someone-elses-spring.html" class="post-peek-read">Read</a>
+    </li>
+
+    <!-- New posts go here — copy a <li class="post-peek"> block and set its data-lang, data-location, data-date -->
+
+  </ul>
+
+  <p class="no-results">Nothing here yet — try a different combination.</p>
+
+</main>
+
+<footer class="site-footer">
+  &copy; 2026 Stillness & Motion
+</footer>
+
+<script>
+// ============================================
+// Post filtering & sorting
+// ============================================
+//
+// How it works:
+//   Each post card (<li class="post-peek">) has three data attributes:
+//     data-lang      → "zh" or "en"
+//     data-location  → "taiwan", "korea", etc.
+//     data-date      → "2026-02" (YYYY-MM, for chronological sorting)
+//
+//   The filter buttons have:
+//     data-filter    → which attribute to filter ("lang" or "location")
+//     data-value     → the value to match, or "all" to show everything
+//
+//   The sort button toggles between oldest-first and newest-first.
+//
+// To add a new post:
+//   1. Add a <li class="post-peek"> with the right data attributes
+//   2. If it's a new location, add a filter button in the "Place" group
+//
+// ============================================
+
+(function () {
+  // Current filter state — starts with everything visible
+  var activeFilters = {
+    lang: 'all',
+    location: 'all'
+  };
+
+  // Grab the DOM elements we'll work with
+  var postList = document.querySelector('.post-list');
+  var posts = Array.from(postList.querySelectorAll('.post-peek'));
+  var filterButtons = Array.from(document.querySelectorAll('.filter-btn'));
+  var sortButton = document.querySelector('.sort-btn');
+  var noResults = document.querySelector('.no-results');
+  var sortAscending = false; // newest first by default
+
+  // --- Filtering ---
+
+  // When a filter button is clicked, update the active filter and re-render
+  filterButtons.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var filterType = btn.dataset.filter;   // "lang" or "location"
+      var filterValue = btn.dataset.value;   // "all", "zh", "en", "taiwan", etc.
+
+      // Update state
+      activeFilters[filterType] = filterValue;
+
+      // Update which button looks active (within its group)
+      filterButtons.forEach(function (other) {
+        if (other.dataset.filter === filterType) {
+          other.classList.toggle('active', other.dataset.value === filterValue);
+        }
+      });
+
+      applyFilters();
+    });
+  });
+
+  // Show or hide each post based on current filters
+  function applyFilters() {
+    var visibleCount = 0;
+
+    posts.forEach(function (post) {
+      var matchesLang = activeFilters.lang === 'all' || post.dataset.lang === activeFilters.lang;
+      var matchesLocation = activeFilters.location === 'all' || post.dataset.location === activeFilters.location;
+
+      // Both filters must match
+      var visible = matchesLang && matchesLocation;
+      post.classList.toggle('hidden', !visible);
+      if (visible) visibleCount++;
+    });
+
+    // Show "no results" message when all posts are filtered out
+    noResults.classList.toggle('visible', visibleCount === 0);
+  }
+
+  // --- Sorting ---
+
+  // Sort on page load so newest appears first
+  applySort();
+
+  // Toggle sort direction on click, then reorder the DOM
+  sortButton.addEventListener('click', function () {
+    sortAscending = !sortAscending;
+    sortButton.textContent = sortAscending ? 'Oldest first' : 'Newest first';
+    applySort();
+  });
+
+  // Reorder post elements inside the list
+  function applySort() {
+    var sorted = posts.slice().sort(function (a, b) {
+      // Compare YYYY-MM strings — alphabetical order = chronological order
+      if (sortAscending) {
+        return a.dataset.date.localeCompare(b.dataset.date);
+      } else {
+        return b.dataset.date.localeCompare(a.dataset.date);
+      }
+    });
+
+    // Move each post to its new position
+    // (appendChild on an existing element moves it, doesn't duplicate)
+    sorted.forEach(function (post) {
+      postList.appendChild(post);
+    });
+  }
+})();
+</script>
+
+</body>
+</html>
